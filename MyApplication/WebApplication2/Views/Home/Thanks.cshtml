@@ -1,0 +1,17 @@
+﻿@model WebApplication2.Models.TestEntity
+
+@{
+    ViewBag.Title = "Thanks";
+}
+
+<h2>Thanks</h2>
+@if (string.IsNullOrEmpty(Model.Name))
+{
+    @: the Name do not has value ,but the demo is successful! 
+}
+else
+{
+    <label>the name is <@Model.Name> </label>
+}
+
+
