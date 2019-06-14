@@ -27,7 +27,13 @@ namespace ConsoleApp1
             //System.Console.WriteLine("Hit <Enter> to end this program");
             //System.Console.ReadLine();
 
-            //isMerge("Can we merge it? Yes, we can!", "n ee tYw n!", "Cawe mrgi? es, eca");
+           
+            System.Console.ReadLine();
+        }
+
+        #region 异步Task模拟
+        public static void AsyncTaskMethod()
+        {
             CancellationTokenSource cts = new CancellationTokenSource();
             Task<int> task = new Task<int>(() => Sum(cts.Token, 5));
             task.Start();
@@ -36,17 +42,15 @@ namespace ConsoleApp1
             {
                 System.Console.WriteLine(task.Result);
             }
-            catch (AggregateException ex )
-            {        
+            catch (AggregateException ex)
+            {
                 ex.Handle(p => p is OperationCanceledException);
                 System.Console.WriteLine("Sum was canceled !");
             }
-           
-            System.Console.ReadLine();
         }
-        public static int Sum(CancellationToken token,int count)
+        public static int Sum(CancellationToken token, int count)
         {
-            
+
             for (int i = 0; i < count; i++)
             {
                 token.ThrowIfCancellationRequested();
@@ -54,35 +58,7 @@ namespace ConsoleApp1
             }
             return -1;
         }
-
-        public static void  Count(CancellationToken token, int countTo)
-        {
-            for (int i = 0; i < countTo; i++)
-            {
-                if (token.IsCancellationRequested)
-                {
-                    System.Console.WriteLine(" Count is cancelled !");
-                    break;
-                }
-                System.Console.WriteLine(i);
-                Thread.Sleep(200);
-            }
-            System.Console.WriteLine(" Count is Done !");
-        }
-
-
-        public static void Go()
-        {
-            CancellationTokenSource cts = new CancellationTokenSource();
-            ThreadPool.QueueUserWorkItem(p=> GetMsg(p),6);
-        }
-        
-        static void GetMsg(object state) => System.Console.WriteLine("In ComputeBoundOp state={0}", state);
-        //{
-        //    System.Console.WriteLine("In ComputeBoundOp state={0}", state);
-        //    Thread.Sleep(1000);
-
-        //}
+        #endregion
 
         private string GetString(string s)
         {
@@ -102,9 +78,9 @@ namespace ConsoleApp1
             //    newStr.Append(" ");
             //}
             //return newStr.ToString().TrimEnd(new char[] { ' ' });
-                    
-           return string.Join(" ", s.Split(' ').Select(k => string.Concat(k.Select((p, i) => i % 2 == 0 ? char.ToLower(p) : char.ToUpper(p)))));
-            
+
+            return string.Join(" ", s.Split(' ').Select(k => string.Concat(k.Select((p, i) => i % 2 == 0 ? char.ToLower(p) : char.ToUpper(p)))));
+
         }
         private static void Marshalling()
         {
@@ -129,11 +105,11 @@ namespace ConsoleApp1
         private static bool test2(string input)
         {
             bool result = false;
-            var arr = input.Where(p => p =='(' || p==')').ToList();
+            var arr = input.Where(p => p == '(' || p == ')').ToList();
             if (arr.Count() % 2 != 0)
                 result = false;
             else
-            {                
+            {
                 int index = 0;
                 while (arr.Count() > 0 && index < arr.Count())
                 {
@@ -141,7 +117,7 @@ namespace ConsoleApp1
                     {
                         result = false;
                         break;
-                    }                   
+                    }
                     index = test3(arr, index);
                 }
                 if (arr.Count == 0)
@@ -157,11 +133,14 @@ namespace ConsoleApp1
                 arr.RemoveAt(index);
                 return 0;
             }
-            else  
-                return index + 1;           
+            else
+                return index + 1;
         }
+
+        #region 判断括号是否对称
         public static bool ValidParentheses(string input)
         {
+            //eg: ((1)(2)3) 
             var count = 0;
             foreach (var c in input)
             {
@@ -174,6 +153,9 @@ namespace ConsoleApp1
             }
             return count == 0;
         }
+        #endregion
+
+        #region 最大公约数，最小公倍数
         public static string convertFrac(long[,] lst)
         {
             string result = "";
@@ -182,7 +164,7 @@ namespace ConsoleApp1
                 //1.取得最小公倍数               
                 long minBeishu = 0;
                 long maxYueShu = 0;
-                for (int i = 0; i < lst.GetLength(0)-1; i++)
+                for (int i = 0; i < lst.GetLength(0) - 1; i++)
                 {
                     maxYueShu = MaxYueShu(lst[i, 1], lst[i + 1, 1]);
                     long temp = lst[i, 1] * lst[i + 1, 1] / maxYueShu;
@@ -195,21 +177,21 @@ namespace ConsoleApp1
                     long num = minBeishu / lst[i, 1];
                     lst[i, 0] = lst[i, 0] * num;
                     lst[i, 1] = lst[i, 1] * num;
-                    str.AppendFormat("({0},{1})",lst[i, 0], lst[i, 1]);
+                    str.AppendFormat("({0},{1})", lst[i, 0], lst[i, 1]);
                 }
                 result = str.ToString();
             }
-            catch (IndexOutOfRangeException ex )
+            catch (IndexOutOfRangeException ex)
             {
                 throw ex;
-            }         
+            }
             return result;
         }
         public static long MaxYueShu(long num1, long num2)
         {
             long a = Math.Max(num1, num2);
             long b = Math.Min(num1, num2);
-            long temp;           
+            long temp;
             while (b != 0)
             {
                 temp = a % b;
@@ -218,13 +200,13 @@ namespace ConsoleApp1
             }
             return a;
         }
+        #endregion
 
+        #region 经典递归算法
         public static bool isMerge(string s, string part1, string part2)
         {
-            /*Console.WriteLine("target: " + s);
-            Console.WriteLine("part 1: " + part1);
-            Console.WriteLine("part 2: " + part2);*/
-
+            //isMerge("Can we merge it? Yes, we can!", "n ee tYw n!", "Cawe mrgi? es, eca");
+            // "Can we merge it? Yes, we can!" 是否能够通过 part1和part2 拼凑出来
             bool empty1 = part1.Length == 0,
                  empty2 = part2.Length == 0,
                  works1 = false,
@@ -232,8 +214,10 @@ namespace ConsoleApp1
 
             if (s.Length == 0)
             {
-                if (part1.Length == 0 && part2.Length == 0) return true;
-                return false;
+                if (part1.Length == 0 && part2.Length == 0)
+                    return true;
+                else
+                    return false;
             }
             else
             {
@@ -242,5 +226,7 @@ namespace ConsoleApp1
                 return works1 || works2;
             }
         }
+        #endregion
+
     }
 }
