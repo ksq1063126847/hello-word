@@ -6,11 +6,18 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication2.Models;
+using WebApplication2.ServicesClass;
 
 namespace WebApplication2.Controllers
 {
     public class HomeController : Controller
     {
+        public HomeController() { }
+        IHelper helper;
+        public HomeController(IHelper helper)
+        {
+            this.helper = helper;
+        }
         public ActionResult Index()
         {
             return View();
