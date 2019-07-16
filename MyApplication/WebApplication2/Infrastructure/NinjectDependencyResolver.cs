@@ -14,6 +14,7 @@ namespace WebApplication2.Infrastructure
         public NinjectDependencyResolver(IKernel kernelParam)
         {
             kernel = kernelParam;
+            AddBinding();
         }
         public object GetService(Type serviceType)
         {

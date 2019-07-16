@@ -12,7 +12,6 @@ namespace WebApplication2.Controllers
 {
     public class HomeController : Controller
     {
-        public HomeController() { }
         IHelper helper;
         public HomeController(IHelper helper)
         {
