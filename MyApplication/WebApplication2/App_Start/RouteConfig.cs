@@ -14,9 +14,15 @@ namespace WebApplication2
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name:null,
+                url:"Page{page}",//更改路由模式 （例子 Index?1 变成 Index1）
+                defaults: new { Controller ="Product",action="List" }
+                );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Product", action = "List", id = UrlParameter.Optional }
             );
         }
     }

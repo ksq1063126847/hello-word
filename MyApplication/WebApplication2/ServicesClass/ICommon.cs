@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace WebApplication2.ServicesClass
 {
-    public interface IHelper
+    public interface ICommon
     {
-        string GetYear();       
+        int count(int param);
     }
 }
