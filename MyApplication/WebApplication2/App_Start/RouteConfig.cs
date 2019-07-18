@@ -15,9 +15,30 @@ namespace WebApplication2
 
             routes.MapRoute(
                 name:null,
-                url:"Page{page}",//更改路由模式 （例子 Index?1 变成 Index1）
-                defaults: new { Controller ="Product",action="List" }
+                url:"",
+                defaults: new { controller = "Product",action = "List" ,category=(string)null,page=1}
                 );
+            routes.MapRoute(
+                name:null,
+                url:"Page{page}",//更改路由模式 （例子: Index?1 变成 Index1）
+                defaults: new { controller = "Product",action="List" , category = (string)null },
+                constraints: new { page =@"\d+"}
+                );
+            routes.MapRoute(
+               name: null,
+               url: "{category}",
+               defaults: new { controller = "Product", action = "List", page=1 }
+               );
+            routes.MapRoute(
+               name: null,
+               url: "{category}/Page{page}",
+               defaults: new { controller = "Product", action = "List"},
+               constraints: new { page = @"\d+" }
+               );
+            routes.MapRoute(
+             name: null,
+             url: "{controller}/{action}"           
+             );
 
             routes.MapRoute(
                 name: "Default",
