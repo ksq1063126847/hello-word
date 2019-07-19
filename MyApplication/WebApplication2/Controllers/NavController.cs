@@ -15,8 +15,9 @@ namespace WebApplication2.Controllers
         {
             this.repository = repository;
         }
-        public PartialViewResult Menu()
+        public PartialViewResult Menu(string category=null)
         {
+            ViewBag.SelectedCategory = category;
             IEnumerable<string> categories = repository.Products.Select(p => p.Category).Distinct().OrderBy(p => p);
             return PartialView(categories);
         }

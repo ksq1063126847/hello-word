@@ -18,7 +18,7 @@ namespace WebApplication2.Repository.Tests
     [TestClass()]
     public class TestRepositoryTests
     {
-        [TestMethod()]
+        [TestMethod]
         public void HelperTest()
         {
             Mock<ICommon> mock = new Mock<ICommon>();
@@ -26,7 +26,7 @@ namespace WebApplication2.Repository.Tests
             IHelper result = new Helper(mock.Object);
             Assert.AreEqual("2019", result.GetYear());
         }
-        [TestMethod()]
+        [TestMethod]
         public void Can_Paginate()
         {
             //1.模仿 IProductRepository 的实例对象, 排除干扰（专注于当前的测试对象，排除其他对象的干扰）
@@ -48,7 +48,7 @@ namespace WebApplication2.Repository.Tests
             Assert.IsTrue(result.Products.Count() == 1);
             Assert.AreEqual("P3", result.Products.ToList()[0].Name);
         }
-        [TestMethod()]
+        [TestMethod]
         public void Can_Create_Categories()
         {
             Mock<IProductRepository> mock = new Mock<IProductRepository>();
@@ -100,6 +100,27 @@ namespace WebApplication2.Repository.Tests
                 }
             }
             return result;
+        }
+        [TestMethod]
+        public void Can_Add_NewCartLine()
+        {
+            var list = new List<Product>() {
+                new Product{ ProductID=1,Name ="P1",Price =10},
+                new Product{ ProductID=2,Name ="P2",Price =20},
+                new Product{ ProductID=3,Name ="P3",Price =30} };
+            var target = new Cart();
+            foreach (var item in list)
+            {
+                target.AddItem(item, 1);
+            }
+            Assert.IsTrue(target.Lines().ToList().Count() == 3);
+            Assert.IsTrue(target.ComputeTotalValue() == 60m);
+            foreach (var item in list)
+            {
+                target.AddItem(item, 1);
+            }
+            Assert.AreEqual(target.Lines().Count(p => p.Product.Name == "P1"), 1);
+            Assert.AreEqual(target.Lines().FirstOrDefault(p => p.Product.Name == "P1").quantity, 2);
         }
     }
 }

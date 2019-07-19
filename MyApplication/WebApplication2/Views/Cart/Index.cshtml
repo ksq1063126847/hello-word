@@ -1,0 +1,37 @@
+﻿@model WebApplication2.Models.CartIndexViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Your cart</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Quantity</th>
+            <th>Item</th>
+            <th class="text-right">Price</th>
+            <th class="text-right">SubTotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model.Cart.Lines())
+        {
+            <tr>
+                <td class="text-center">@p.quantity</td>
+                <td class="text-left">@p.Product.Name</td>
+                <td class="text-right">@p.Product.Price.ToString("c")</td>
+                <td class="text-right">@((p.Product.Price * p.quantity).ToString("c"))</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" class="text-right">Total:</td>
+            <td class="text-right">@Model.Cart.ComputeTotalValue().ToString("c")</td>
+        </tr>
+    </tfoot>
+</table>
+<div>
+    <a class="btn btn-primary" href="@Model.ReturnUrl">ContinuingShoping</a>
+</div>
+
