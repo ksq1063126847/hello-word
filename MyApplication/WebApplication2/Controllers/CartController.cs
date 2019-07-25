@@ -12,41 +12,62 @@ namespace WebApplication2.Controllers
     public class CartController : Controller
     {
         private IProductRepository repository;
-        public CartController(IProductRepository repository)
+        private IOrderProcessor orderProcessor;
+        public CartController(IProductRepository repository, IOrderProcessor orderProcessor)
         {
             this.repository = repository;
+            this.orderProcessor = orderProcessor;
         }
-        public RedirectToRouteResult AddToCard(int productId,string returnUrl)
+        public RedirectToRouteResult AddToCard(Cart cart, int productId,string returnUrl)
         {
             Product product = repository.Products.FirstOrDefault(p => p.ProductID == productId);
             if (product != null)
             {
-                GetCart().AddItem(product, 1);
+                cart.AddItem(product, 1);
             }
             return RedirectToAction("Index", new { returnUrl });
         }
-        public RedirectToRouteResult RemoveFromCart(int productId, string returnUrl)
+        public RedirectToRouteResult RemoveFromCart(Cart cart,int productId, string returnUrl)
         {
             Product product = repository.Products.FirstOrDefault(p => p.ProductID == productId);
             if (product != null)
             {
-                GetCart().RemoveLine(product);
+                cart.RemoveLine(product);
             }
             return RedirectToAction("Index", new { returnUrl });
         }
-        public Cart GetCart()
+        public ViewResult Index(Cart cart,string returnUrl)
         {
-            Cart cart = (Cart)Session["Cart"];
-            if (cart == null)
-            {
-                cart = new Cart();
-                Session["Cart"] = cart;
-            }
-            return cart;
+            return View(new CartIndexViewModel { Cart = cart, ReturnUrl = returnUrl });
         }
-        public ViewResult Index(string returnUrl)
+
+        public PartialViewResult Summary(Cart cart)
         {
-            return View(new CartIndexViewModel { Cart = GetCart(), ReturnUrl = returnUrl });
+            return PartialView(cart);
+        }
+
+        public ViewResult Checkout()
+        {
+            return View(new ShippingDetails());
+        }
+        [HttpPost]
+        public ViewResult Checkout(Cart cart, ShippingDetails shippingDetails )
+        {
+            if (cart.Lines().Count() == 0)
+            {
+                ModelState.AddModelError("", "你的购物车是空的");
+            }
+
+            if (ModelState.IsValid)
+            {
+                orderProcessor.ProcessOrder(cart, shippingDetails);
+                cart.Clear();
+                return View("Completed");
+            }
+            else
+            {
+                return View(shippingDetails);
+            }
         }
     }
 }

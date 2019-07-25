@@ -15,11 +15,12 @@ namespace WebApplication2.Controllers
         {
             this.repository = repository;
         }
-        public PartialViewResult Menu(string category=null)
+        public PartialViewResult Menu(string category=null,bool horizontalLayout =false)
         {
             ViewBag.SelectedCategory = category;
             IEnumerable<string> categories = repository.Products.Select(p => p.Category).Distinct().OrderBy(p => p);
-            return PartialView(categories);
+            var viewName = horizontalLayout ? "MenuHorizontal" : "Menu";
+            return PartialView(viewName,categories);
         }
     }
 }

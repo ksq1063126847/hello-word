@@ -9,6 +9,7 @@ using Moq;
 using Domain.Abstract;
 using Domain.Entities;
 using Domain.Concrete;
+using System.Configuration;
 
 namespace WebApplication2.Infrastructure
 {
@@ -35,6 +36,12 @@ namespace WebApplication2.Infrastructure
             kernel.Bind<IHelper>().To<Helper>();
             kernel.Bind<ICommon>().To<Common>().WithConstructorArgument("param",true);
             kernel.Bind<IProductRepository>().To<EFProductRepository>();
+
+            EmailSetting emailSetting = new EmailSetting()
+            {
+                WriteAsFile = bool.Parse(ConfigurationManager.AppSettings["Email.WriteAsFile"] ?? "false")
+            };
+            kernel.Bind<IOrderProcessor>().To<EmailOderProcessor>().WithConstructorArgument("settings", emailSetting);
         }
     }
 }
