@@ -15,7 +15,9 @@ namespace UrlsAndRoutes.Infrastructure
         public LegacyRoute(params string[] targetUrls)
         {
             urls = targetUrls;
-        } 
+        }
+
+        //1.处理 输入URL
         public override RouteData GetRouteData(HttpContextBase httpContext)
         {
             RouteData result = null;
@@ -29,6 +31,7 @@ namespace UrlsAndRoutes.Infrastructure
             }
             return result;
         }
+        //2.处理 输出URL
         public override VirtualPathData GetVirtualPath(RequestContext requestContext, RouteValueDictionary values)
         {
             VirtualPathData result = null;

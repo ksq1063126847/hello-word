@@ -18,9 +18,11 @@ namespace UrlsAndRoutes
 
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            //routes.RouteExistingFiles = true; //使路由计算先于文件检查
+
             //自定义路由(保持旧网址的URL不变的情况下，使旧网址转到新网址。自定义路由做了这种“转换”)
             //routes.Add(new LegacyRoute("~/articles/Windows_3", "~/Test/Index"));// 带上 点 会失效？ "~/articles/Windows_3.1_Overview.html"
-
+            
             //1.路由是按顺序匹配的，越具体的路由，要先定义
             //routes.MapRoute("", "Shop/{action}", new { controller = "Home" });
             //routes.MapRoute("", "X{controller}/{action}");
