@@ -12,6 +12,7 @@ using Domain.Entities;
 using WebApplication2.Controllers;
 using System.Text.RegularExpressions;
 using WebApplication2.Models;
+using System.Web.Mvc;
 
 namespace WebApplication2.Repository.Tests
 {
@@ -102,7 +103,7 @@ namespace WebApplication2.Repository.Tests
             return result;
         }
         [TestMethod]
-        public void Can_Add_NewCartLine()
+        public void Can_Add_NewCartLine() //测试购物车功能
         {
             var list = new List<Product>() {
                 new Product{ ProductID=1,Name ="P1",Price =10},
@@ -114,13 +115,50 @@ namespace WebApplication2.Repository.Tests
                 target.AddItem(item, 1);
             }
             Assert.IsTrue(target.Lines().ToList().Count() == 3);
-            Assert.IsTrue(target.ComputeTotalValue() == 60m);
-            foreach (var item in list)
+            Assert.IsTrue(target.ComputeTotalValue() == 60m);           
+        }
+
+        [TestMethod]
+        public void Can_Add_To_Cart()
+        {
+            Mock<IProductRepository> mock = new Mock<IProductRepository>();
+            mock.Setup(p => p.Products).Returns(new List<Product>()
             {
-                target.AddItem(item, 1);
-            }
-            Assert.AreEqual(target.Lines().Count(p => p.Product.Name == "P1"), 1);
-            Assert.AreEqual(target.Lines().FirstOrDefault(p => p.Product.Name == "P1").quantity, 2);
+                new Product{ ProductID=1,Name ="P1",Category="Apples"},              
+            });
+            CartController target = new CartController(mock.Object,null);
+            Cart cart = new Cart();
+            RedirectToRouteResult result = target.AddToCard(cart, 1, "urlTest");
+            Assert.AreEqual("Index", result.RouteValues["action"]);
+            Assert.AreEqual("urlTest", result.RouteValues["returnUrl"]);
+        }
+        [TestMethod]
+        public void Can_View_Cart_Context()
+        {
+            CartController target = new CartController(null,null);
+            Cart cart = new Cart();
+            CartIndexViewModel result =(CartIndexViewModel) target.Index(cart, "urlTest").ViewData.Model;
+            Assert.AreSame(cart, result.Cart);
+            Assert.AreEqual("urlTest", result.ReturnUrl);
+        }
+
+        [TestMethod]
+        public void Can_Not_Add_Empty_Cart()
+        {
+            //1.模仿订单处理器
+            Mock<IOrderProcessor> mock = new Mock<IOrderProcessor>();
+            //2.准备空的购物车 和 订单详情
+            Cart cart = new Cart();            
+            ShippingDetails shipping = new ShippingDetails();
+            //3.控制器实例
+            CartController target = new CartController(null, mock.Object);
+            //4.动作
+            var result = target.Checkout(cart, shipping);
+            //断言-检查，订单尚未传给处理器
+            mock.Verify(p => p.ProcessOrder(It.IsAny<Cart>(), It.IsAny<ShippingDetails>()), Times.Never);
+
+            Assert.AreEqual("", result.ViewName);//返回的是默认视图
+            Assert.AreEqual(false, result.ViewData.ModelState.IsValid);//传递的是非法模型
         }
     }
 }

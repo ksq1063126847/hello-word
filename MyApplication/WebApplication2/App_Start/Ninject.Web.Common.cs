@@ -13,6 +13,7 @@ namespace WebApplication2.App_Start
     using Ninject.Web.Common.WebHost;
     using WebApplication2.Infrastructure;
 
+    //从Nuget安装Niject自动添加的 
     public static class NinjectWebCommon 
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
