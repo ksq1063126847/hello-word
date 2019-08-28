@@ -34,7 +34,9 @@ namespace Filters.Controllers
                 throw new ArgumentOutOfRangeException("id", id, "");
         }
 
-        [CustomAction]
+        [CustomAction] //动作过滤器（自定义）
+        [CustomResult] //结果过滤器（自定义）
+        [CustomAll] //实现了ActionFilter抽象类， 实现对 Action 和 ActionResult 的“双重”过滤
         public string FilterTest()
         {
             return "This is the FilterTest Action";

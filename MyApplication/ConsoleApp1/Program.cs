@@ -27,7 +27,7 @@ namespace ConsoleApp1
             //System.Console.WriteLine("Hit <Enter> to end this program");
             //System.Console.ReadLine();
 
-           
+            AsyncTaskMethod();
             System.Console.ReadLine();
         }
 

@@ -102,7 +102,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\CustomActionAttribute.cs" />
+    <Compile Include="Infrastructure\CustomAllAttribute.cs" />
     <Compile Include="Infrastructure\CustomAuthAttribute.cs" />
+    <Compile Include="Infrastructure\CustomResultAttribute.cs" />
     <Compile Include="Infrastructure\GoogleAuthAttribute.cs" />
     <Compile Include="Infrastructure\RangeExceptionAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
