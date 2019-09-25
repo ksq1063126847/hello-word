@@ -14,51 +14,29 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
+            //1.排序算法测试
             //int[] arr = new int[] { 3, 7, 5, 4, 7, 8, 0, 9, 1, 2, 10, 6 };
             //SortClass sort = new SortClass();           
             //arr = sort.QuickSort(arr, 0, arr.Length - 1);
             //System.Console.WriteLine(string.Join(",", arr.Select(p => p.ToString())));
             //System.Console.ReadLine();
 
+            //2.线程池
             //System.Console.WriteLine("Main thread: queuing a asynchronous operation");
-            //ThreadPool.QueueUserWorkItem(GetMsg, 5);
+            //ThreadPool.QueueUserWorkItem(GetMsg, 5);           
             //System.Console.WriteLine("Main thread: Doing Other work here");
             //Thread.Sleep(3000);
             //System.Console.WriteLine("Hit <Enter> to end this program");
             //System.Console.ReadLine();
 
-            AsyncTaskMethod();
+            //3.异步Task
+            //new AsyncDemo().Run();
+
+            Parallel.For(0, 100, p => System.Console.WriteLine(p));
             System.Console.ReadLine();
         }
 
-        #region 异步Task模拟
-        public static void AsyncTaskMethod()
-        {
-            CancellationTokenSource cts = new CancellationTokenSource();
-            Task<int> task = new Task<int>(() => Sum(cts.Token, 5));
-            task.Start();
-            cts.Cancel();
-            try
-            {
-                System.Console.WriteLine(task.Result);
-            }
-            catch (AggregateException ex)
-            {
-                ex.Handle(p => p is OperationCanceledException);
-                System.Console.WriteLine("Sum was canceled !");
-            }
-        }
-        public static int Sum(CancellationToken token, int count)
-        {
-
-            for (int i = 0; i < count; i++)
-            {
-                token.ThrowIfCancellationRequested();
-                System.Console.WriteLine("this is " + i.ToString());
-            }
-            return -1;
-        }
-        #endregion
+        
 
         private string GetString(string s)
         {
