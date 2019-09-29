@@ -18,7 +18,7 @@ namespace ConsoleApp1
             AsyncTaskFactoryMethod();
         }
 
-        #region 异步Task模拟
+        #region 1.异步Task模拟
         public void AsyncTaskMethod()
         {
             CancellationTokenSource cts = new CancellationTokenSource();
@@ -49,6 +49,7 @@ namespace ConsoleApp1
         }
         #endregion
 
+        #region 2.任务工厂
         public void AsyncTaskFactoryMethod()
         {
             Task parent = new Task(() =>
@@ -76,7 +77,7 @@ namespace ConsoleApp1
                 tf.ContinueWhenAll(
                     childTasks,
                     completedTasks => completedTasks.Where(t => !t.IsFaulted && !t.IsCanceled).Max(t => t.Result),
-                    CancellationToken.None).ContinueWith(t => System.Console.WriteLine("The max is " + t.Result),TaskContinuationOptions.ExecuteSynchronously);
+                    CancellationToken.None).ContinueWith(t => System.Console.WriteLine("The max is " + t.Result), TaskContinuationOptions.ExecuteSynchronously);
             });
 
             parent.ContinueWith(p =>
@@ -89,12 +90,11 @@ namespace ConsoleApp1
                     sb.AppendFormat("  " + e.GetType().ToString());
                 }
                 Console.WriteLine(sb.ToString());
-            },TaskContinuationOptions.OnlyOnFaulted);
+            }, TaskContinuationOptions.OnlyOnFaulted);
 
             parent.Start();
 
         }
-
         public Int32 SumInt32(CancellationToken ct, Int32 n)
         {
             Int32 sum = 0;
@@ -106,6 +106,27 @@ namespace ConsoleApp1
                 checked { sum += n; } //如果n太大，会抛出System.OverFlowException
             }
             return sum;
+        }
+        #endregion
+
+        //3.Timer 
+        Timer timer;
+        public void TimerTest()
+        {
+            Console.WriteLine("Check status every 2 second.");
+
+            //创建但不起动计时器，确保timer在线程池线程调用Test方法之前引用该计时器（即确保timer不是null）
+            timer = new Timer(Test, null, Timeout.Infinite, Timeout.Infinite);
+            //现在启动计时
+            timer.Change(0, Timeout.Infinite);
+        }
+        private void Test(object obj)
+        {
+            Console.WriteLine("In Status at {0}", DateTime.Now);
+            Thread.Sleep(1000);//模拟工作执行1秒
+
+            //返回前让timer再次触发
+            timer.Change(2, Timeout.Infinite);
         }
     }
 }

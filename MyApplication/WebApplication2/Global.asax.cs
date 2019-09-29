@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,10 @@ namespace WebApplication2
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             ModelBinders.Binders.Add(typeof(Cart), new CartModelBinder());
+
+            //Nlog日志 （配置文件为Nlog.config）
+            Logger logger = LogManager.GetCurrentClassLogger();
+            logger.Info("这是日志Info");
         }
     }
 }

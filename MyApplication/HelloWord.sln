@@ -25,6 +25,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Filters", "Filters\Filters.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNewService", "MyNewService\MyNewService.csproj", "{72558A22-06C6-4867-9E65-C6B8B3E5F91D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApp1", "WindowsFormsApp1\WindowsFormsApp1.csproj", "{C1BA908D-E22B-4EFF-A5FE-C3919EA869C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csproj", "{4EE8C5D6-AF0F-4687-9D6D-2F116922CE77}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +79,14 @@ Global
 		{72558A22-06C6-4867-9E65-C6B8B3E5F91D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72558A22-06C6-4867-9E65-C6B8B3E5F91D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72558A22-06C6-4867-9E65-C6B8B3E5F91D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1BA908D-E22B-4EFF-A5FE-C3919EA869C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1BA908D-E22B-4EFF-A5FE-C3919EA869C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1BA908D-E22B-4EFF-A5FE-C3919EA869C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1BA908D-E22B-4EFF-A5FE-C3919EA869C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EE8C5D6-AF0F-4687-9D6D-2F116922CE77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EE8C5D6-AF0F-4687-9D6D-2F116922CE77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EE8C5D6-AF0F-4687-9D6D-2F116922CE77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EE8C5D6-AF0F-4687-9D6D-2F116922CE77}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

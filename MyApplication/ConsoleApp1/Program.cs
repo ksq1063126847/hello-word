@@ -30,9 +30,7 @@ namespace ConsoleApp1
             //System.Console.ReadLine();
 
             //3.异步Task
-            //new AsyncDemo().Run();
-
-            Parallel.For(0, 100, p => System.Console.WriteLine(p));
+            new AsyncDemo().Run();
             System.Console.ReadLine();
         }
 
