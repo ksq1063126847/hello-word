@@ -15,8 +15,6 @@ namespace Filters.Infrastructure
             {
                 filterContext.Result = new HttpUnauthorizedResult();
             }
-
-
         }
 
         public void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)

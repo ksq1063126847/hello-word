@@ -18,7 +18,6 @@ namespace Filters.Controllers
 
         [GoogleAuth]
         [CustomAuth(true)]
-
         public string List()
         {
             return "This is the List action on the Home Controller";
