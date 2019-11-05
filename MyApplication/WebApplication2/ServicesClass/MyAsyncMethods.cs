@@ -15,5 +15,6 @@ namespace WebApplication2.ServicesClass
             var response = await  httpClient.GetAsync(@"https://www.baidu.com/");
             return response.Content.Headers.ContentLength;
         }
+
     }
 }

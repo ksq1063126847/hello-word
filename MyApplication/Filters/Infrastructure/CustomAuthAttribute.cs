@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace Filters.Infrastructure
 {
@@ -18,7 +19,7 @@ namespace Filters.Infrastructure
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
             string name = httpContext.User.Identity.Name;
-
+            //((FormsIdentity) httpContext.User.Identity ).Ticket;
             if (httpContext.User.Identity.IsAuthenticated)
                 return true;
             else
