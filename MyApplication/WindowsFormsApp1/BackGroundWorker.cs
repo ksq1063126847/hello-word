@@ -119,6 +119,7 @@ namespace WindowsFormsApp1
             if (backgroundWorker1.IsBusy)
                 return;
             backgroundWorker1.RunWorkerAsync();
+            
         }
 
         private void BtnStop_Click(object sender, EventArgs e)
