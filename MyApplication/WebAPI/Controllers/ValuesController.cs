@@ -22,20 +22,6 @@ namespace WebAPI.Controllers
             return "value";
         }
 
-        public string GetTest(int id)
-        {
-            return "GetTest";
-        }
-
-        [HttpGet]
-        public JsonResult<Product> MyTest(int id = 0)
-        {
-            Product p = new Product();
-            p.ID = 1;
-            p.Name = "one";
-            return Json(p);
-        }
-
         // POST api/values
         public void Post([FromBody]string value)
         {

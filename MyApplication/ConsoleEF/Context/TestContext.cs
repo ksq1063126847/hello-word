@@ -34,6 +34,8 @@ namespace ConsoleEF.Context
             //<2>
             modelBuilder.Configurations.Add(new DonatorMap());
             modelBuilder.Configurations.Add(new PersonMap());
+
+            
             base.OnModelCreating(modelBuilder);
         }
     }

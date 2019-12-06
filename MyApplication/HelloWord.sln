@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApp1", "Windows
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csproj", "{4EE8C5D6-AF0F-4687-9D6D-2F116922CE77}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp2", "ConsoleApp2\ConsoleApp2.csproj", "{845C6600-0588-45F0-84C5-042ADDD9B96D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{4EE8C5D6-AF0F-4687-9D6D-2F116922CE77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EE8C5D6-AF0F-4687-9D6D-2F116922CE77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4EE8C5D6-AF0F-4687-9D6D-2F116922CE77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{845C6600-0588-45F0-84C5-042ADDD9B96D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{845C6600-0588-45F0-84C5-042ADDD9B96D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{845C6600-0588-45F0-84C5-042ADDD9B96D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{845C6600-0588-45F0-84C5-042ADDD9B96D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

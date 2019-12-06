@@ -1,10 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
     <AssemblyName>UdpSender</AssemblyName>
     <OutputType>Exe</OutputType>
     <PackageId>UdpSender</PackageId>
+    <StartupObject></StartupObject>
   </PropertyGroup>
 
 </Project>

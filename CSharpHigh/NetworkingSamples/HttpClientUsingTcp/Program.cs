@@ -15,7 +15,7 @@ namespace HttpClientUsingTcp
             {
                 ShowUsage();
             }
-            Task<string> t1 = RequestHtmlAsync(args[0]);
+            Task<string> t1 = RequestHtmlAsync(args[0]);           
             WriteLine(t1.Result);
             ReadLine();
         }
@@ -32,14 +32,14 @@ namespace HttpClientUsingTcp
             {
                 using (var client = new TcpClient())
                 {
-                    await client.ConnectAsync(hostname, 80);
-                   
+                    await client.ConnectAsync(hostname, 80);       
+                    
                     NetworkStream stream = client.GetStream();
                     string header = "GET / HTTP/1.1\r\n" +
                         $"Host: {hostname}:80\r\n" +
                         "Connection: close\r\n" +
                         "\r\n";
-                    byte[] buffer = Encoding.UTF8.GetBytes(header);
+                    byte[] buffer = Encoding.UTF8.GetBytes(header);                   
                     await stream.WriteAsync(buffer, 0, buffer.Length);
                     await stream.FlushAsync();
                     var ms = new MemoryStream();

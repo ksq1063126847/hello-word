@@ -8,6 +8,12 @@ namespace Domain.Concrete
 {
     public class EFDbContext : DbContext
     {
+        public EFDbContext() { }
+        public EFDbContext(string connstr) : base(connstr)
+        {
+
+        }
         public DbSet<Product> Products { get; set; }
+        
     }
 }

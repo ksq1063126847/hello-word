@@ -76,5 +76,4 @@ namespace ConsoleEF
             }
             Console.Read();
         }
-    }
-}
+  
