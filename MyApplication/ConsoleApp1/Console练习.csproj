@@ -62,6 +62,7 @@
     <Compile Include="SortClass.cs" />
     <Compile Include="单例5种写法\Singleton.cs" />
     <Compile Include="字符串插入O%28n%29\StringDemo.cs" />
+    <Compile Include="TaskLog\TaskLogger.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
