@@ -100,29 +100,29 @@ namespace ConsoleApp1
         }
 
         //堆排序
-        public int[]  HeapSortMain(int[] arr)
+        public int[] HeapSortMain(int[] arr)
         {
             //1.构建大顶堆
             for (int i = arr.Length / 2 - 1; i >= 0; i--)
             {
-                HeapSort(arr, i,arr.Length);
+                HeapSort(arr, i, arr.Length);
             }
             //2.交换堆顶与“末尾”元素位置，调整堆结构           
             for (int i = arr.Length - 1; i > 0; i--)
             {
-                Swap(arr, 0, i);               
+                Swap(arr, 0, i);
                 HeapSort(arr, 0, i);
             }
             return arr;
         }
-        private void HeapSort(int[] arr, int index,int len)
+        private void HeapSort(int[] arr, int index, int len)
         {
             var left = 2 * index + 1;
             var right = 2 * index + 2;
             var largest = index;
             if (left < len && arr[left] > arr[largest])
                 largest = left;
-            if (right <len && arr[right] > arr[largest])
+            if (right < len && arr[right] > arr[largest])
                 largest = right;
             if (index != largest)
             {
@@ -130,7 +130,5 @@ namespace ConsoleApp1
                 HeapSort(arr, largest, len);
             }
         }
-
-
     }
 }

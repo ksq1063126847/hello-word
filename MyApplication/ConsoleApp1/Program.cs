@@ -16,7 +16,7 @@ namespace ConsoleApp1
         {
             //1.排序算法测试
             //int[] arr = new int[] { 3, 7, 5, 4, 7, 8, 0, 9, 1, 2, 10, 6 };
-            //SortClass sort = new SortClass();           
+            //SortClass sort = new SortClass();
             //arr = sort.QuickSort(arr, 0, arr.Length - 1);
             //System.Console.WriteLine(string.Join(",", arr.Select(p => p.ToString())));
             //System.Console.ReadLine();
@@ -30,7 +30,7 @@ namespace ConsoleApp1
             //System.Console.ReadLine();
 
             //3.异步Task
-            new AsyncDemo().Run();
+            //new AsyncDemo().Run();
             System.Console.ReadLine();
         }
 
