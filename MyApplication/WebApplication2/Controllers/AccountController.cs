@@ -28,7 +28,7 @@ namespace WebApplication2.Controllers
             {
                 if (authProvider.Authenticate(model.UserName, model.Password))
                 {
-                    return RedirectToAction("Index", "Admin");
+                    return RedirectToAction("Index", "Admin");                   
                 }
                 else
                 {

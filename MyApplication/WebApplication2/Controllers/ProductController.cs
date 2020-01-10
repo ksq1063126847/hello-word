@@ -61,5 +61,16 @@ namespace WebApplication2.Controllers
         {
             return PartialView(repository.Products.Count());
         }
+
+        //
+        public HttpStatusCodeResult StatusCode()
+        {
+            
+            return new HttpStatusCodeResult(404, "页面没找到");
+            //1.更加便捷的404
+            //return HttpNotFound();
+            //2.表示未经授权的 HTTP 请求的结果。401
+            //return new HttpUnauthorizedResult();
+        }
     }
 }
