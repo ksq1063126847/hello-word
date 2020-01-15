@@ -12,5 +12,28 @@ grant connect to HZUSER;
 --4.把角色赋予指定账户
 grant SELECT_ROLE to HZUSER; 
 
+--5.oracle 游标使用
+declare CURSOR CustCursor
+IS 
+select * from Hz_Userreginfo; --1.这里设置条件，筛选需要更改的数据
+CustRecord Hz_Userreginfo%rowtype;
+begin
+  open CustCursor;
+  loop
+  fetch CustCursor into CustRecord; 
+  exit when CustCursor%notfound;
+  --Begin这里执行更新语句  , 只更改 身份证号idcard ， 账号logid(在原数据末尾加符号@)
+  update Hz_Userreginfo set idcard = CustRecord.idcard || '@',logid=CustRecord.logid ||'@'  where MID= CustRecord.MID;
+  --End
+  end loop;
+  close CustCursor;  
+end;
+
+--6.orcale 数据库备份
+
+backup database 'mydb' to disk ='D:\mydb.bak' with init
+restore database 'mydb' from disk='D:\mydb.bak'
+
+
 
 
