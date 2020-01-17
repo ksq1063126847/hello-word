@@ -13,7 +13,7 @@ namespace WebApplication2.Controllers
         IAuthProvider authProvider;
         public AccountController(IAuthProvider auth)
         {
-            this.authProvider = auth;
+            this.authProvider = auth;            
         }
 
         public ViewResult Login()

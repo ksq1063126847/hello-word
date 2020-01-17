@@ -62,6 +62,7 @@
     <Compile Include="BackGroundWorker.Designer.cs">
       <DependentUpon>BackGroundWorker.cs</DependentUpon>
     </Compile>
+    <Compile Include="互锁构造\MultiWebRequests.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="BackGroundWorker.resx">
