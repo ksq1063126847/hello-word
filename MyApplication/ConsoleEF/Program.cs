@@ -13,8 +13,8 @@ namespace ConsoleEF
     {
         static void Main(string[] args)
         {
-            Database.SetInitializer( new InitiStrategy());
-            CreatData();            
+            Database.SetInitializer(new InitiStrategy());
+            CreatData();
             ReadData();
             Console.Read();
         }
@@ -43,7 +43,7 @@ namespace ConsoleEF
                 {
                     Console.WriteLine("{0}\t\t{1}\t\t{2}\t\t{3}", item.DonatorId, item.Name, item.Amount, item.DonateDate.GetValueOrDefault().ToShortDateString());
                 }
-            }           
+            }
         }
         static void UpdateData()
         {
@@ -56,9 +56,9 @@ namespace ConsoleEF
                     {
                         item.Amount = 200;
                         context.SaveChanges();
-                    }                   
+                    }
                 }
-            }           
+            }
         }
         static void DeleteData()
         {
@@ -76,4 +76,5 @@ namespace ConsoleEF
             }
             Console.Read();
         }
-  
+    }
+}

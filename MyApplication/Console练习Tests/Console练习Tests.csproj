@@ -63,7 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ConsoleApp1\Console练习.csproj">
-      <Project>{2223B7C9-2706-4C92-B514-11B297EDD799}</Project>
+      <Project>{2223b7c9-2706-4c92-b514-11b297edd799}</Project>
       <Name>Console练习</Name>
     </ProjectReference>
   </ItemGroup>
